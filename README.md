@@ -29,7 +29,18 @@ A lightweight SaaS prototype that allows users to input a domain name via a web 
 - Docker and Docker Compose installed
 - Internet connection (for tool updates and passive reconnaissance)
 
-### Option 1: Using Docker Compose (Recommended)
+### Option 1: Minimal Version (Recommended for Coolify)
+
+For quick deployment and testing:
+
+```bash
+docker build -f Dockerfile.minimal -t scanner-minimal .
+docker run -p 5000:5000 scanner-minimal
+```
+
+Access at `http://localhost:5000`
+
+### Option 2: Using Docker Compose
 
 1. Clone or download the project files
 2. Navigate to the project directory
@@ -41,7 +52,7 @@ docker-compose up --build
 
 4. Access the application at `http://localhost:5000`
 
-### Option 2: Using Docker directly
+### Option 3: Using Docker directly (Full Version)
 
 1. Build the Docker image:
 
@@ -57,18 +68,26 @@ docker run -p 5000:5000 -v /tmp/scans:/tmp/scans attack-surface-scanner
 
 3. Access the application at `http://localhost:5000`
 
-### Option 3: Coolify Deployment
+### Option 4: Coolify Deployment
 
-For Coolify deployment, use the simplified configuration:
+For Coolify deployment, use the minimal configuration:
 
-1. Use `Dockerfile.simple` as your Dockerfile
-2. Use `coolify-docker-compose.yml` for Docker Compose deployment
-3. Set environment variables in Coolify:
+1. **Dockerfile**: Use `Dockerfile.minimal`
+2. **Docker Compose**: Use `docker-compose.coolify.yml`
+3. **Environment Variables** in Coolify:
    - `FLASK_ENV=production`
    - `FLASK_DEBUG=0`
    - `PYTHONUNBUFFERED=1`
 
 See `COOLIFY_DEPLOYMENT.md` for detailed Coolify deployment instructions.
+
+### Testing the Deployment
+
+Use the test script to verify everything works:
+
+```bash
+python3 test_app.py http://your-domain:5000
+```
 
 ## Usage
 
