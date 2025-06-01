@@ -57,6 +57,19 @@ docker run -p 5000:5000 -v /tmp/scans:/tmp/scans attack-surface-scanner
 
 3. Access the application at `http://localhost:5000`
 
+### Option 3: Coolify Deployment
+
+For Coolify deployment, use the simplified configuration:
+
+1. Use `Dockerfile.simple` as your Dockerfile
+2. Use `coolify-docker-compose.yml` for Docker Compose deployment
+3. Set environment variables in Coolify:
+   - `FLASK_ENV=production`
+   - `FLASK_DEBUG=0`
+   - `PYTHONUNBUFFERED=1`
+
+See `COOLIFY_DEPLOYMENT.md` for detailed Coolify deployment instructions.
+
 ## Usage
 
 1. **Enter Domain**: Input the target domain (e.g., `example.com`) in the web interface

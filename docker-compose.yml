@@ -1,19 +1,25 @@
 version: '3.8'
 
 services:
-  attack-surface-scanner:
-    build: .
+  app:
+    build: 
+      context: .
+      dockerfile: Dockerfile
     ports:
       - "5000:5000"
     environment:
       - FLASK_ENV=production
       - FLASK_DEBUG=0
+      - PYTHONUNBUFFERED=1
     volumes:
-      - /tmp/scans:/tmp/scans
+      - scan_data:/tmp/scans
     restart: unless-stopped
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:5000/"]
       interval: 30s
       timeout: 10s
       retries: 3
-      start_period: 40s
+      start_period: 60s
+
+volumes:
+  scan_data:
